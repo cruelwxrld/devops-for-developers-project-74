@@ -2,6 +2,14 @@ version: '3.8'
 
 services:
   app:
+    entrypoint: |
+      sh -c "
+      if [ ! -f .env ] && [ -f .env.example ]; then
+        cp .env.example .env
+        echo 'Created .env from .env.example'
+      fi
+      exec make test
+      "
     build:
       context: .
       dockerfile: Dockerfile.production
