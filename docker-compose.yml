@@ -2,12 +2,11 @@ version: '3.8'
 
 services:
   app:
-    entrypoint: sh -c "cp .env.example .env && make dev"
     build:
       context: .
       dockerfile: Dockerfile.production
     image: skywhymuted/devops-for-developers-project-74
-    command: make test
+    entrypoint: sh -c "if [ ! -f .env ]; then cp .env.example .env; fi && make test"
     depends_on:
       db:
         condition: service_healthy
@@ -16,7 +15,7 @@ services:
       DATABASE_NAME: postgres
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: password
-      NODE_ENV: test  
+      NODE_ENV: test
   db:
     image: postgres:latest
     environment:
