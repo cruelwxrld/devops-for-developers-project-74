@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   app:
-    build: .
-    volumes:
-      - ./app:/app
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    image: skywhymuted/devops-for-developers-project-74
     command: make test
