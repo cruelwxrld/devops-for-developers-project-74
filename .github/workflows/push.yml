@@ -12,11 +12,8 @@ jobs:
       
       - name: Create .env file
         run: |
-          cp .env.example .env
-          echo "DATABASE_HOST=db" >> .env
-          echo "DATABASE_NAME=postgres" >> .env
-          echo "DATABASE_USERNAME=postgres" >> .env
-          echo "DATABASE_PASSWORD=password" >> .env
+          cp ${{ github.workspace }}/.env.example ${{ github.workspace }}/.env
+          cat ${{ github.workspace }}/.env
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
