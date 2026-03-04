@@ -11,11 +11,12 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Copy .env file
-        run: |
-          pwd
-          ls -la
-          cp .env.example .env
-          cat .env
+        run: cp .env.example .env
+      
+      - name: Run tests
+        uses: hexlet/project-action@release
+        with:
+          verbose: true
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
